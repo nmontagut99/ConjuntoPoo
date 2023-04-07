@@ -3,11 +3,11 @@ package entidades;
 public class Residente {
 	// ATRIBUTOS
 	String nombre;
-	int telefono;
+	String telefono;
 	byte edad;
 	int cedula;
 	String genero;
-	Boolean Colombiano;
+
 	// CONSTRUCTOR VACIO
 	public Residente() {
 		// VACIO
@@ -19,10 +19,10 @@ public class Residente {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public int getTelefono() {
+	public String getTelefono() {
 		return telefono;
 	}
-	public void setTelefono(int telefono) {
+	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
 	public byte getEdad() {
@@ -42,12 +42,6 @@ public class Residente {
 	}
 	public void setGenero(String genero) {
 		this.genero = genero;
-	}
-	public Boolean getColombiano() {
-		return Colombiano;
-	}
-	public void setColombiano(Boolean colombiano) {
-		Colombiano = colombiano;
 	}
 	
 	
