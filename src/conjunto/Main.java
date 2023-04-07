@@ -34,7 +34,7 @@ public class Main {
 				System.out.println("| Agregar residentes: |");
 				// Metodo para agregar residentes a la lista
 				agregarResidente();
-				listarResidentes(listaResidentes);
+				//listarResidentes(listaResidentes); // lo quito porque es muy molesto XD
 				//
 				break;
 			case 2: // READ
@@ -47,6 +47,7 @@ public class Main {
 				System.out.println("|-----------------|");
 				System.out.println("| Actualizar residentes: |");
 				// Metodo para actualziar residentes
+				actualizarResidente(listaResidentes);
 				break;
 			case 4: // DELETE
 				System.out.println("|-----------------|");
@@ -158,26 +159,40 @@ public class Main {
 					switch (opcion) {
 					case 1:
 						System.out.println("| 1. Telefono |");
+						System.out.println("| Telefono actual: "+k.getTelefono());
+						System.out.println("| Cual es el nuevo telefono: |");
+						String telefono = entrada.next();
+						k.setTelefono(telefono);
+						System.out.println("| Modificacion exitosa: Nuevo telefono: "+k.getTelefono()+" |");
 						break;
 					case 2:
-						System.out.println("| 2. Edad |");
+						System.out.println("| 1. Edad |");
+						System.out.println("| Edad actual: "+k.getEdad());
+						System.out.println("| Cual es la nueva edad: |");
+						byte edad = entrada.nextByte();
+						k.setEdad(edad); // contarle al bigotes la estupidez que me tuvo casi media hora cambiando tipos de variable
+						System.out.println("| Modificacion exitosa: Nueva edad: "+k.getEdad()+" |");
+						
 						break;
 					case 3:
 						System.out.println("| 3. Genero |");
+						System.out.println("| Genero actual: "+k.getGenero());
+						System.out.println("| Cual es el nuevo genero: |");
+						String genero = entrada.next();
+						k.setGenero(genero);
+						System.out.println("| Modificacion exitosa: Nuevo genero: "+k.getGenero()+" |");
+						
 						break;
 					default:
-
+						System.out.println("| 4. exit |");
 						break;
 					}
 
 					System.out.println("Desea modificar otro dato del residente" + k.getNombre() + "?");
 					bandera = entrada.nextBoolean();
 				} while (bandera);
-				// residente = k;
 			}
 		});
-		listaResidentes.remove(residente);
-		listarResidentes(listaResidentes);
 
 	}
 
@@ -196,7 +211,7 @@ public class Main {
 			}
 		});
 		listaResidentes.remove(residente);
-		listarResidentes(listaResidentes);
+		//listarResidentes(listaResidentes);
 
 	}
 
