@@ -1,6 +1,6 @@
 package entidades;
 
-public class Persona {
+public class Residente {
 	// ATRIBUTOS
 	String nombre;
 	int telefono;
@@ -9,7 +9,7 @@ public class Persona {
 	String genero;
 	Boolean Colombiano;
 	// CONSTRUCTOR VACIO
-	public Persona() {
+	public Residente() {
 		// VACIO
 	}
 	// METODOS
