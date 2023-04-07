@@ -12,6 +12,7 @@ public class Main {
 	static Residente residente;
 	static int contador;
 	static List<Residente> listaResidentes = new ArrayList<>();
+	static Residente r;
 
 	public static void main(String[] args) {
 		// REPETIR EL PROYECTO
@@ -31,8 +32,9 @@ public class Main {
 			case 1: // CREATE
 				System.out.println("|-----------------|");
 				System.out.println("| Agregar residentes: |");
-				// Metodo para agregar residentes
+				// Metodo para agregar residentes a la lista
 				agregarResidente();
+				listarResidentes(listaResidentes);
 				//
 				break;
 			case 2: // READ
@@ -50,6 +52,7 @@ public class Main {
 				System.out.println("|-----------------|");
 				System.out.println("| Eliminar residentes: |");
 				// Metodo para eliminar resiedentes
+				eliminarResidente(listaResidentes);
 				break;
 			default:
 				System.out.println("|-----------------|");
@@ -64,9 +67,10 @@ public class Main {
 	// Metodo para agregar residentes a la lista
 	private static List<Residente> agregarResidente() {
 		boolean bandera;
-		residente = new Residente();
 		// ---------------
 		do {
+			residente = new Residente();
+
 			System.out.print("Nombre: ");
 			String nombre = entrada.next();
 			residente.setNombre(nombre);
@@ -80,7 +84,7 @@ public class Main {
 			residente.setEdad(edad);
 
 			System.out.print("Cedula: ");
-			int cedula = entrada.nextInt();
+			String cedula = entrada.next();
 			residente.setCedula(cedula);
 
 			System.out.print("Genero: ");
@@ -121,4 +125,79 @@ public class Main {
 			contador++;
 		});
 	}
+
+	public static void actualizarResidente(List<Residente> listaResidentes) {
+		System.out.println("Residentes actualmente en el conjunto");
+		listarResidentes(listaResidentes);
+		System.out.println("| --------------------- |");
+		System.out.println("Ingrese al cedula del residente que desea modificar de la lista: ");
+		String cedula = entrada.next();
+
+		listaResidentes.forEach(k -> {
+
+			if (k.getCedula().equals(cedula)) {
+				do {
+					System.out.println("| -------------------------------- |");
+					System.out.println("|- Valores que se puede modificar -|");
+					System.out.println("| -------------------------------- |");
+					System.out.println("Nombre: " + k.getNombre());
+					// System.out.println("Cedula: "+k.getCedula());
+					System.out.println("Telefono: " + k.getTelefono());
+					System.out.println("Edad: " + k.getEdad());
+					System.out.println("Genero: " + k.getGenero());
+					System.out.println("| ------------------- |");
+					// ---------------
+					System.out.println("Que dato desea modificar al residente " + k.getNombre() + "?");
+					System.out.println("| 1. Telefono |");
+					System.out.println("| 2. Edad |");
+					System.out.println("| 3. Genero |");
+					System.out.println("| 4. exit |");
+
+					byte opcion = entrada.nextByte();
+
+					switch (opcion) {
+					case 1:
+						System.out.println("| 1. Telefono |");
+						break;
+					case 2:
+						System.out.println("| 2. Edad |");
+						break;
+					case 3:
+						System.out.println("| 3. Genero |");
+						break;
+					default:
+
+						break;
+					}
+
+					System.out.println("Desea modificar otro dato del residente" + k.getNombre() + "?");
+					bandera = entrada.nextBoolean();
+				} while (bandera);
+				// residente = k;
+			}
+		});
+		listaResidentes.remove(residente);
+		listarResidentes(listaResidentes);
+
+	}
+
+	public static void eliminarResidente(List<Residente> listaResidentes) {
+		System.out.println("Residentes actualmente en el conjunto");
+		listarResidentes(listaResidentes);
+		System.out.println("| --------------------- |");
+		System.out.println("Ingrese al cedula del residente que desea eliminar de la lista: ");
+		String cedula = entrada.next();
+
+		listaResidentes.forEach(k -> {
+
+			if (k.getCedula().equals(cedula)) {
+				System.out.println("Residente: " + k.getNombre() + " con cedula: " + k.getCedula() + " fue eliminado");
+				residente = k;
+			}
+		});
+		listaResidentes.remove(residente);
+		listarResidentes(listaResidentes);
+
+	}
+
 }
