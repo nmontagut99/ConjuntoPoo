@@ -7,7 +7,7 @@ public class Residente {
 	private byte edad;
 	private String cedula;
 	private String genero;
-	//byte casa;
+	// byte casa;
 
 	// CONSTRUCTOR VACIO
 	public Residente() {
@@ -54,6 +54,5 @@ public class Residente {
 	public void setGenero(String genero) {
 		this.genero = genero;
 	}
-
 
 }

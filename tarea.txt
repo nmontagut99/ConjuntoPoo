@@ -1,0 +1,20 @@
+usuario
+
+String nombre
+String telefono
+byte edad
+String cedula
+String genero
+
+contructor(){
+
+}
+
+metodos get and set - yakas
+------------------------------
+menu para ingresar usiaros tipo CRUD
+
+crear - yakas
+leer - yakas
+modificar - yakas
+eliminar - yakas
