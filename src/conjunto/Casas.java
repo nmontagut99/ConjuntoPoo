@@ -6,17 +6,19 @@ import java.util.List;
 import java.util.Scanner;
 
 import entidades.Casa;
+import entidades.Residente;
 
 public class Casas {
-    static List<Casa> casasDisponibles;
+    static List<Casa> casasDisponibles = new ArrayList<>(Arrays.asList(new Casa(false, 2, 1, "1", true))); // SIMULAR DATOS DE BBDD
+    static Residente residentes = new Residente();
+    static String arrendatario;
     static Scanner entrada = new Scanner(System.in);
     static Casa casa;
     static int contador;
     static Casa r;
 
     public static void casasMain() {
-        casasDisponibles = new ArrayList<>(
-                Arrays.asList(new Casa(false, 2, 1, "1", true))); // SIMULAR DATOS DE BBDD
+        
         Boolean bandera;
         do {
             System.out.println("| ------------------------------------ |");
@@ -43,6 +45,7 @@ public class Casas {
                     eliminarCasa(casasDisponibles);
                     break;
             }
+            System.out.println("Desea agregar otra casa:");
             bandera = entrada.nextBoolean();
         } while (bandera);
     }
@@ -63,8 +66,22 @@ public class Casas {
             System.out.print("Banios: ");
             casa.setBanios(entrada.nextInt());
 
-            System.out.print("Manzana: ");
-            casa.setNumeroCasa(entrada.next());
+            int ban =0;
+            
+            do {
+                System.out.print("Numero casa: ");
+                String numCasa = entrada.next();
+               
+                Casa c = casasDisponibles.stream().filter(cas -> cas.getNumeroCasa().equals(numCasa)).findAny().orElse(null);
+                
+                if (c != null) {
+                	System.out.println("La casa ya existe");
+                }else {
+                    casa.setNumeroCasa(numCasa);
+                    ban = 1;
+                }
+                
+            }while(ban != 1);
 
             System.out.print("Parqueadero: ");
             casa.setParqueadero(entrada.nextBoolean());
@@ -72,7 +89,7 @@ public class Casas {
             System.out.println("---------------");
             casasDisponibles.add(casa);
 
-            System.out.println("Desea agregar otro residente?");
+            System.out.println("Desea agregar otra casa?");
             bandera = entrada.nextBoolean();
         } while (bandera);
 
@@ -80,22 +97,32 @@ public class Casas {
     }
 
     // Metodo para listar los casas agregados
-    private static void listarCasas(List<Casa> listaCasas) {
+    protected static void listarCasas(List<Casa> listaCasas) {
         contador = 1;
         listaCasas.forEach(j -> {
             System.out.println("|-----------------|");
             System.out.println("| Casa #" + contador + " |");
             System.out.println("|-----------------|");
             System.out.println("| Arrendada: " + j.getArrendada());
+            
+            if(j.getArrendada()) {
+            	Residentes.listaResidentes.forEach(k->{
+            		if (j.getNumeroCasa().equals(k.getCasa().getNumeroCasa())) {
+            			System.out.println("| Arrendatario: " + k.getNombre());
+            		}
+            		
+            	});
+            	//Residentes residente = new Residentes();
+            }
 
             System.out.println("| Habitaciones: " + j.getHabitaciones());
 
             System.out.println("| Banios: " + j.getBanios());
 
-            System.out.println("| Manzana: " + j.getNumeroCasa());
+            System.out.println("| Numero casa: " + j.getNumeroCasa());
 
             System.out.println("| Parqueadero: " + j.getParqueadero());
-
+            
             System.out.println("|-----------------|");
 
             contador++;
@@ -103,10 +130,10 @@ public class Casas {
     }
 
     public static void actualizarCasa(List<Casa> listaCasas) {
-        System.out.println("Residentes actualmente en el conjunto");
+        System.out.println("Casas actualmente en el conjunto");
         listarCasas(listaCasas);
         System.out.println("| --------------------- |");
-        System.out.println("Ingrese al cedula del residente que desea modificar de la lista: ");
+        System.out.println("Ingrese el numero de la casa que desea modificar de la lista: ");
         String cedula = entrada.next();
 
         listaCasas.forEach(k -> {
@@ -161,7 +188,7 @@ public class Casas {
                             break;
                     }
 
-                    System.out.println("Desea modificar otro dato del residente" + k.getNumeroCasa() + "?");
+                    System.out.println("Desea modificar otro dato de la casa" + k.getNumeroCasa() + "?");
                     bandera = entrada.nextBoolean();
                 } while (bandera);
             }
@@ -170,10 +197,10 @@ public class Casas {
     }
 
     public static void eliminarCasa(List<Casa> listaCasas) {
-        System.out.println("Residentes actualmente en el conjunto");
+        System.out.println("Casas actualmente en el conjunto");
         listarCasas(listaCasas);
         System.out.println("| --------------------- |");
-        System.out.println("Ingrese al cedula del residente que desea eliminar de la lista: ");
+        System.out.println("Ingrese el numero de la casa que desea eliminar de la lista: ");
         String cedula = entrada.next();
 
         listaCasas.forEach(k -> {
