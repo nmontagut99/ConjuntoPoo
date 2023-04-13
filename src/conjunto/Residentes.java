@@ -116,7 +116,9 @@ public class Residentes {
 
 					Casas.casasDisponibles.forEach(c -> {
 
-						if (c.getNumeroCasa().equals(numeroCasa) && c.getArrendada().equals(true)) {
+						if(!c.getNumeroCasa().equals(numeroCasa)) {
+							System.out.println("La casa no esta registrasa, pruebe con otra");
+						}else if (c.getNumeroCasa().equals(numeroCasa) && c.getArrendada().equals(true)) {
 							System.out.println("Esta casa ya esta ocupada por favor elija otra:");
 						} else if (c.getNumeroCasa().equals(numeroCasa)) {
 							residente.setCasa(c);
