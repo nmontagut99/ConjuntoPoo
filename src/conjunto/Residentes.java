@@ -9,6 +9,7 @@ import entidades.Residente;
 public class Residentes {
 	static Scanner entrada = new Scanner(System.in);
 	static boolean bandera;
+	static byte ban = 0;
 	static Residente residente;
 	static int contador;
 	static List<Residente> listaResidentes = new ArrayList<>();
@@ -84,16 +85,16 @@ public class Residentes {
 			byte edad = entrada.nextByte();
 			residente.setEdad(edad);
 
-			byte ban = 0;
+			ban = 0;
 			do {
 				System.out.print("Cedula: ");
 				String cedula = entrada.next();
-				Residente r = listaResidentes.stream().filter(ced -> ced.getCedula().equals(cedula)).findAny().orElse(null);
+				Residente r = listaResidentes.stream().filter(ced -> ced.getCedula().equals(cedula)).findAny()
+						.orElse(null);
 				if (r == null) {
 					residente.setCedula(cedula);
-					System.out.println("putos");
 					ban = 1;
-				}else {
+				} else {
 					System.out.println("Cedula ingresada ya existe");
 				}
 				System.out.println(ban);
@@ -106,19 +107,25 @@ public class Residentes {
 			Casas casa = new Casas();
 			// validar que este vacio
 			if (!Casas.casasDisponibles.isEmpty()) {
-				Casas.listarCasas(Casas.casasDisponibles);
-				
-				System.out.println("Escruba el numero de la casa que desea tener: ");
-				String numeroCasa = entrada.next();
+				ban = 0;
+				do {
+					Casas.listarCasas(Casas.casasDisponibles);
+					System.out.println("------------------------");
+					System.out.println("Escruba el numero de la casa que desea tener: ");
+					String numeroCasa = entrada.next();
 
-				Casas.casasDisponibles.forEach(c -> {
+					Casas.casasDisponibles.forEach(c -> {
 
-					if (c.getNumeroCasa().equals(numeroCasa)) {
-						residente.setCasa(c);
-						c.setArrendada(true);
-					}
+						if (c.getNumeroCasa().equals(numeroCasa) && c.getArrendada().equals(true)) {
+							System.out.println("Esta casa ya esta ocupada por favor elija otra:");
+						} else if (c.getNumeroCasa().equals(numeroCasa)) {
+							residente.setCasa(c);
+							c.setArrendada(true);
+							ban = 1;
+						}
 
-				});
+					});
+				} while (ban != 1);
 			}
 
 			System.out.println("---------------");
