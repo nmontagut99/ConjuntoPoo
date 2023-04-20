@@ -115,7 +115,7 @@ public class Residentes {
 					String numeroCasa = entrada.next();
 
 					Casas.casasDisponibles.forEach(c -> {
-
+						// validar que no pueda tomar una casa que no existe ni tampoco una que ya este ocupada
 						if(!c.getNumeroCasa().equals(numeroCasa)) {
 							System.out.println("La casa no esta registrasa, pruebe con otra");
 						}else if (c.getNumeroCasa().equals(numeroCasa) && c.getArrendada().equals(true)) {
